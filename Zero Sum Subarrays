@@ -1,0 +1,37 @@
+You are given an array arr[] of size n. Find the total count of sub-arrays having their sum equal to 0.
+
+
+Example 1:
+
+Input:
+n = 6
+arr[] = {0,0,5,5,0,0}
+Output: 6
+Explanation: The 6 subarrays are 
+[0], [0], [0], [0], [0,0], and [0,0].
+
+
+
+def countSubarraysWithZeroSum(arr):
+    prefix_sum = 0
+    prefix_sum_count = {}
+    count = 0
+
+    # Initialize the prefix sum with 0 and count with 1
+    prefix_sum_count[0] = 1
+
+    for num in arr:
+        prefix_sum += num
+
+        if prefix_sum in prefix_sum_count:
+            count += prefix_sum_count[prefix_sum]
+            prefix_sum_count[prefix_sum] += 1
+        else:
+            prefix_sum_count[prefix_sum] = 1
+
+    return count
+
+# Example usage
+arr = [0, 0, 5, 5, 0, 0]
+result = countSubarraysWithZeroSum(arr)
+print(result)
